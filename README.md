@@ -46,3 +46,11 @@ python3 app/app.py
 
 🧪 Güvenlik Testleri
 python3 -m pytest tests/test_middleware.py
+
+Nasıl Çalıştırılır?:
+
+    pip install -r requirements.txt
+
+    python3 src/app.py
+
+Testler: pytest tests/test_middleware.py komutuyla test edilebileceğini belirt.
