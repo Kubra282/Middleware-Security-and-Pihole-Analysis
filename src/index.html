@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Audit Dashboard | Kübra Fison</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4500; /* İstinye Turuncusu */
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --safe: #22c55e;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary);
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            margin: 40px 0;
+        }
+
+        .student-info {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .status-vulnerable { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .status-secure { background: rgba(34, 197, 94, 0.2); color: var(--safe); }
+
+        .analysis-section {
+            margin-top: 40px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+        }
+
+        h1, h2, h3 { margin-top: 0; }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: var(--primary);
+            color: white;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover { opacity: 0.8; }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="student-info">İSTİNYE ÜNİVERSİTESİ | BİLİŞİM GÜVENLİĞİ TEKNOLOJİSİ</div>
+        <h1>Middleware & Network Security Project</h1>
+        <p>Student: <strong>Kübra Fison</strong></p>
+    </header>
+
+    <div class="container">
+        <div class="analysis-section">
+            <h2><i class="fas fa-shield-virus"></i> Proje Özeti: L5 Middleware Analizi</h2>
+            <p>Bu uygulama, modern web mimarilerinde Katman 5 (L5) Middleware sıralamasının sistem güvenliği üzerindeki kritik etkilerini simüle eder. Yanlış yapılandırılmış bir Middleware, sistemin DoS saldırılarına maruz kalmasına neden olabilir.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <span class="status-badge status-vulnerable">ZAFİYETLİ (VULNERABLE)</span>
+                <h3>L5 Middleware Order Error</h3>
+                <p>Yetkilendirme kontrolü, yoğun işlemden (Heavy Process) <strong>SONRA</strong> yapılır.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-exclamation-triangle"></i> Kaynak Tüketimi (DoS Riski)</li>
+                    <li><i class="fas fa-times"></i> Geçersiz Yetki Kontrolü</li>
+                </ul>
+                <a href="/api/vulnerable" class="btn" target="_blank">Simülasyonu Başlat</a>
+            </div>
+
+            <div class="card">
+                <span class="status-badge status-secure">GÜVENLİ (SECURE)</span>
+                <h3>Fail-Fast Implementation</h3>
+                <p>Yetkilendirme kontrolü, tüm işlemlerden <strong>ÖNCE</strong> (Middleware başında) yapılır.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Optimize Kaynak Kullanımı</li>
+                    <li><i class="fas fa-lock"></i> Erken Bloklama (Shielding)</li>
+                </ul>
+                <a href="/api/secure" class="btn" target="_blank">Güvenli Rotayı Test Et</a>
+            </div>
+        </div>
+
+        <div class="analysis-section">
+            <h2><i class="fas fa-network-wired"></i> Pi-hole Ağ Güvenlik Denetimi</h2>
+            <p>Projenin ikinci aşamasında, Pi-hole DNS sunucusu üzerinden ağ trafiği analiz edilmiştir. Reklam engelleme ve zararlı domain filtreleme süreçleri bu mimariye entegre edilmiştir.</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-microchip"></i> Docker Üzerinde Dağıtık Pi-hole Yapılandırması</li>
+                <li><i class="fas fa-filter"></i> DNS-Level Traffic Filtering</li>
+                <li><i class="fas fa-chart-line"></i> Real-time Log Analysis</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Kübra Fison - Bilişim Güvenliği Teknolojisi Vize Projesi
+    </footer>
+
+</body>
+</html>
