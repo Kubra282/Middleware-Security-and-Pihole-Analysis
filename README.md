@@ -8,11 +8,11 @@
 ---
 
 ## 📝 Proje Hakkında
-Bu proje, web uygulama güvenliğinde kritik bir rol oynayan **Middleware (Ara Yazılım)** katmanlarının doğru yapılandırılmasını ve sıralanmasını (L5 Senaryosu) simüle eder. Ayrıca, açık kaynaklı **Pi-hole** projesi üzerinde 5 adımlı derinlemesine bir güvenlik analizi gerçekleştirilmiştir.
-
+## 🚀 Proje Hakkında
+Uygulama, Middleware (Ara Katman) sıralamasının siber güvenlik üzerindeki kritik önemini simüle eder. Yanlış yapılandırılmış bir Middleware (Vulnerable), sistemin DoS saldırılarına maruz kalmasına neden olurken; doğru yapılandırılmış Middleware (Secure), "Fail-Fast" prensibiyle sistemi korur.
 ---
 
-## 📂 Proje Dosya Yapısı (Orange List)
+## 📂 Proje Dosya Yapısı 
 
 Hocanın belirttiği teknik kriterlere ve dosya hiyerarşisine tam uyumlu yapı:
 
@@ -29,28 +29,24 @@ Hocanın belirttiği teknik kriterlere ve dosya hiyerarşisine tam uyumlu yapı:
 
 ---
 
-## 🚀 Çalıştırma Talimatları
+## 🛠️ Kurulum ve Çalıştırma
 
-### 1. Docker ile Kurulum
-İzole bir ortamda çalıştırmak için:
+### 1. Docker ile Kurulum (Önerilen)
+Konteyner mimarisi ile izole bir ortamda çalıştırmak için:
 ```bash
 docker build -t middleware-security-app .
 docker run -p 5000:5000 middleware-security-app
 
-## Yerel Kurulum (Manual)
-Bash
+Yerel Kurulum (Manuel)
+# Sanal ortam oluşturma ve aktif etme
 python3 -m venv venv
 source venv/bin/activate
+
+# Gereksinimleri yükleme
 pip install -r requirements.txt
-python3 app/app.py
+
+# Uygulamayı başlatma
+python3 src/app.py
 
 🧪 Güvenlik Testleri
-python3 -m pytest tests/test_middleware.py
-
-Nasıl Çalıştırılır?:
-
-    pip install -r requirements.txt
-
-    python3 src/app.py
-
-Testler: pytest tests/test_middleware.py komutuyla test edilebileceğini belirt.
+PYTHONPATH=. pytest tests/test_middleware.py
