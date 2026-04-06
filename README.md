@@ -67,6 +67,37 @@ Siber güvenlikte **"Fail-Fast"** prensibi, sistem kaynaklarını korumanın ilk
 
 ---
 
+---
+
+## 🔍 5 Aşamalı Teknik Güvenlik Analizi
+
+Hocanın belirttiği kriterler çerçevesinde projenin siber güvenlik ve sistem mimarisi analizi aşağıdadır:
+
+### 🛡️ Adım 1: Kurulum ve `install.sh` Analizi (Reverse Engineering)
+- **Fonksiyon:** `install.sh` dosyası sistem bağımlılıklarını (Docker, Python kütüphaneleri) kontrol eder, gerekli `/reports` ve `/logs` dizinlerini oluşturur ve servislerin `execute` yetkilerini yapılandırır.
+- **Güvenlik Analizi:** Proje, körü körüne `curl | bash` mantığı yerine, yerel script üzerinden kontrollü kurulum yapar. 
+- **Kritik Soru:** Dış kaynaklardan çekilen paketler için hash (SHA-256) kontrolü eklenerek "Supply Chain Attack" riskleri minimize edilmiştir.
+
+### 🧹 Adım 2: İzolasyon ve İz Bırakmadan Temizlik (Forensics)
+- **Kaldırma Süreci:** Proje `docker compose down -v` komutuyla konteynerleri, ağları ve **volume** (veri hacmi) yapılarını tamamen siler.
+- **Kanıt:** Sistemde hiçbir portun açık kalmadığı `netstat -tulpn` komutuyla, kalıntı dosya olmadığı ise `ls -la /var/lib/docker/volumes` kontrolüyle ispatlanmaktadır.
+
+### 🤖 Adım 3: CI/CD Pipeline ve Webhook Analizi
+- **Akış:** `.github/workflows/test.yml` dosyası, her `push` işleminde sanal bir Ubuntu ayağa kaldırarak `pytest` kontrollerini otomatik çalıştırır.
+- **Webhook Nedir?**: Webhook, GitHub'daki bir olayı (örneğin kod yükleme) dış bir servise (CI/CD sunucusu veya Discord) anında bildiren bir "HTTP callback" mekanizmasıdır. Bu projede testlerin tetiklenmesini sağlar.
+
+### 📦 Adım 4: Docker Mimarisi ve Konteyner Güvenliği
+- **Mimari:** Proje, çok katmanlı (Multi-stage) Docker imajı kullanır. Her katman, imaj boyutunu küçültür ve saldırı yüzeyini daraltır.
+- **Fark:** VM'ler tüm işletim sistemini sanallaştırırken (Ağır), Docker sadece uygulama süreçlerini izole eder (Hafif ve Hızlı). Bu projede konteynerler sadece gerekli `53` (DNS) ve `5000` (API) portlarına erişebilir.
+
+### 🔍 Adım 5: Kaynak Kod ve Tehdit Modelleme (Threat Modeling)
+- **Entrypoint:** Uygulamanın giriş noktası `src/app.py` dosyasıdır.
+- **Auth Mekanizması:** L5 Middleware katmanında **Session tabanlı** kimlik doğrulama kullanılır.
+- **Saldırı Analizi:** Bir saldırgan kodda sert kodlanmış (hardcoded) anahtarlar arayabilir. Bu projede "Fail-Fast" prensibiyle, yetkisiz istekler daha veritabanına ulaşmadan Middleware katmanında (Zabıta/Polis hiyerarşisi) durdurulur.
+
+---
+
+
 ## 🛠️ Kurulum ve Çalıştırma
 
 ### 1. Docker ile Kurulum (Önerilen)
