@@ -43,26 +43,27 @@ Siber güvenlikte **"Fail-Fast"** prensibi, sistem kaynaklarını korumanın ilk
 1. **Güvenli Katman (Secure):** Yetkilendirme kontrolü, yoğun veri işleme adımından önce konumlandırılmıştır. Yetkisiz istekler sunucuyu yormadan anında reddedilir.
 2. **Zafiyetli Katman (Vulnerable):** Yetki kontrolünün işlemden sonra yapılması simüle edilerek sunucunun DoS saldırılarına nasıl açık hale geldiği gösterilmiştir.
 3. **DNSSEC:** Pi-hole üzerinde aktif edilen DNSSEC protokolü ile DNS Spoofing saldırılarına karşı ağ bütünlüğü mühürlenmiştir.
-
 ---
 
 ## 📂 Proje Dosya Yapısı (Orange List)
-Hocanın belirttiği teknik kriterlere ve dosya hiyerarşisine %100 uyumlu yapı:
+
 
 | Klasör / Dosya | Açıklama |
 | :--- | :--- |
-| **`src/app.py`** | Flask tabanlı L5 Middleware güvenlik mantığı |
-| **`src/templates/`** | Uygulamanın görsel kullanıcı arayüzü (Dashboard) |
-| **`tests/`** | Otomatik güvenlik ve hiyerarşi testleri (Pytest) |
-| **`reports/`** | 5 Adımlı teknik analiz dökümanları (Markdown) |
-| **`docs/`** | Teknik spesifikasyonlar ve sistem dökümantasyonu |
-| **`demo/`** | Proje demonstrasyon videosu |
-| **`Dockerfile`** | Uygulamanın izole konteyner mimarisi |
-| **`install.sh`** | Otomatik kurulum ve deployment scripti |
-| **`requirements.txt`** | Yazılım Malzeme Listesi (SBOM) |
-|| **`tests/`** | **Güvenlik Testleri:** Otomatik yetki testleri (Pytest) 
-| **`LICENSE`** | **MIT Lisansı:** Yasal ve akademik proje kullanım izni | 
-| **`isu_logo.png`** | **Logo:** İstinye Üniversitesi kurumsal kimliği 
+| **`.github/workflows/`** | **CI/CD Pipeline:** GitHub Actions üzerinden otomatik güvenlik test hattı |
+| **`docs/`** | **Teknik Spesifikasyonlar:** Sistem mimarisi ve siber güvenlik dökümantasyonu |
+| **`reports/`** | **Analiz Raporları:** 5 Adımlı teknik analiz süreç dökümanları (Markdown) |
+| **`src/`** | **Kaynak Kod:** Flask tabanlı L5 Middleware ve "Fail-Fast" güvenlik mantığı |
+| **`tests/`** | **Güvenlik Testleri:** Otomatik hiyerarşi ve yetki doğrulama testleri (Pytest) |
+| **`.gitattributes`** | **Repo Nitelikleri:** Dosya yapısı ve profesyonel repo konfigürasyonu |
+| **`.gitignore`** | **Hassas Veri Güvenliği:** Repo dışı tutulacak (secret, .env) dosya listesi |
+| **`LICENSE`** | **MIT Lisansı:** Yasal ve akademik proje kullanım izinleri |
+| **`README.md`** | **Proje Vitrini:** Tüm teknik detayların yer aldığı ana portal |
+| **`TODO.md`** | **Yol Haritası:** 5 Aşamalı siber analiz süreci ve gelecek geliştirme planları |
+| **`isu_logo.png`** | **Branding:** İstinye Üniversitesi kurumsal kimlik görseli |
+| **`Dockerfile`** | **Konteynerizasyon:** Uygulamanın izole ve güvenli Docker mimarisi |
+| **`install.sh`** | **Otomasyon:** Tersine mühendislik analizi yapılmış kurulum scripti |
+| **`requirements.txt`** | **SBOM:** Yazılım Malzeme Listesi ve kütüphane bağımlılıkları |
 
 ---
 
