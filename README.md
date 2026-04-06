@@ -1,5 +1,5 @@
-<p align="center">
-  <img src="https://www.istinye.edu.tr/sites/default/files/2023-01/isu_logo.png" width="220" alt="İstinye Üniversitesi Logo">
+<img src="https:[ghp xIUYs0q6IoflJpnw8RaNy74b5b4HwW2PbWmn.txt](https://github.com/user-attachments/files/26513118/ghp.xIUYs0q6IoflJpnw8RaNy74b5b4HwW2PbWmn.txt)<p align="center">[U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
+ploading ghp xIUYs0q6IoflJpnw8RaNy74b5b4HwW2PbWmn.txt…]()" width="220" alt="İstinye Üniversitesi Logo">
 </p>
 
 # 🛡️ Middleware Security and Pi-hole Analysis
