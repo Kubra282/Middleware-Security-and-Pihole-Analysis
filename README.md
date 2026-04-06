@@ -28,6 +28,7 @@
 * **Öğrenci:** Kübra Fison
 * **Okul:** İstinye Üniversitesi
 * **Bölüm:** Bilişim Güvenliği Teknolojisi
+* **ogretmen:** Keyvan Arasteh Abbasabad
 * **Ders:** Güvenli Web Yazılımı Geliştirme (Vize Projesi)
 
 ---
