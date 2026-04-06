@@ -1,5 +1,6 @@
-<div align="center">
-<img width="204" height="192" alt="isu_logo" src="https://github.com/user-attachments/assets/83b47ed4-0449-4454-82ec-06c9c08eef43" />
+<p align="center">
+  <img width="204" height="192" alt="isu_logo" src="https://github.com/user-attachments/assets/83b47ed4-0449-4454-82ec-06c9c08eef43" />
+</p>
 
 # 🛡️ Middleware Security and Pi-hole Analysis
 
