@@ -28,7 +28,7 @@
 * **Öğrenci:** Kübra Fison
 * **Okul:** İstinye Üniversitesi
 * **Bölüm:** Bilişim Güvenliği Teknolojisi
-* **ogretmen:** Keyvan Arasteh Abbasabad
+* **danisman:** Keyvan Arasteh Abbasabad
 * **Ders:** Güvenli Web Yazılımı Geliştirme (Vize Projesi)
 
 ---
@@ -60,7 +60,9 @@ Hocanın belirttiği teknik kriterlere ve dosya hiyerarşisine %100 uyumlu yapı
 | **`Dockerfile`** | Uygulamanın izole konteyner mimarisi |
 | **`install.sh`** | Otomatik kurulum ve deployment scripti |
 | **`requirements.txt`** | Yazılım Malzeme Listesi (SBOM) |
-| **`.github/workflows/`** | CI/CD (GitHub Actions) Otomatik Test Hattı |
+|| **`tests/`** | **Güvenlik Testleri:** Otomatik yetki testleri (Pytest) 
+| **`LICENSE`** | **MIT Lisansı:** Yasal ve akademik proje kullanım izni | 
+| **`isu_logo.png`** | **Logo:** İstinye Üniversitesi kurumsal kimliği 
 
 ---
 
