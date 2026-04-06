@@ -20,7 +20,7 @@
 * [📂 Proje Dosya Yapısı (Orange List)](#-proje-dosya-yapısı-orange-list)
 * [🛠️ Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
 * [🧪 Güvenlik Testleri](#-güvenlik-testleri)
-* [📹 Demo Bölümü (+10 Puan)](#-demo-bölümü-10-puan)
+
 
 ---
 
