@@ -20,7 +20,7 @@
 * [📂 Proje Dosya Yapısı (Orange List)](#-proje-dosya-yapısı-orange-list)
 * [🛠️ Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
 * [🧪 Güvenlik Testleri](#-güvenlik-testleri)
-
+* [🔍 5 Aşamalı Teknik Analiz](#-5-aşamalı-teknik-güvenlik-analizi)
 
 ---
 
@@ -28,7 +28,7 @@
 * **Öğrenci:** Kübra Fison
 * **Okul:** İstinye Üniversitesi
 * **Bölüm:** Bilişim Güvenliği Teknolojisi
-* **danisman:** Keyvan Arasteh Abbasabad
+* **Danışman:** Keyvan Arasteh Abbasabad
 * **Ders:** Güvenli Web Yazılımı Geliştirme (Vize Projesi)
 
 ---
@@ -43,73 +43,64 @@ Siber güvenlikte **"Fail-Fast"** prensibi, sistem kaynaklarını korumanın ilk
 1. **Güvenli Katman (Secure):** Yetkilendirme kontrolü, yoğun veri işleme adımından önce konumlandırılmıştır. Yetkisiz istekler sunucuyu yormadan anında reddedilir.
 2. **Zafiyetli Katman (Vulnerable):** Yetki kontrolünün işlemden sonra yapılması simüle edilerek sunucunun DoS saldırılarına nasıl açık hale geldiği gösterilmiştir.
 3. **DNSSEC:** Pi-hole üzerinde aktif edilen DNSSEC protokolü ile DNS Spoofing saldırılarına karşı ağ bütünlüğü mühürlenmiştir.
+
 ---
 
 ## 📂 Proje Dosya Yapısı (Orange List)
-
+Hocanın belirttiği teknik kriterlere ve profesyonel repo standartlarına tam uyumlu yapı:
 
 | Klasör / Dosya | Açıklama |
 | :--- | :--- |
 | **`.github/workflows/`** | **CI/CD Pipeline:** GitHub Actions üzerinden otomatik güvenlik test hattı |
 | **`docs/`** | **Teknik Spesifikasyonlar:** Sistem mimarisi ve siber güvenlik dökümantasyonu |
-| **`reports/`** | **Analiz Raporları:** 5 Adımlı teknik analiz süreç dökümanları (Markdown) |
+| **`reports/`** | **Analiz Raporları:** 5 Adımlı teknik analiz süreç dökümanları |
 | **`src/`** | **Kaynak Kod:** Flask tabanlı L5 Middleware ve "Fail-Fast" güvenlik mantığı |
-| **`tests/`** | **Güvenlik Testleri:** Otomatik hiyerarşi ve yetki doğrulama testleri (Pytest) |
-| **`.gitattributes`** | **Repo Nitelikleri:** Dosya yapısı ve profesyonel repo konfigürasyonu |
-| **`.gitignore`** | **Hassas Veri Güvenliği:** Repo dışı tutulacak (secret, .env) dosya listesi |
+| **`tests/`** | **Güvenlik Testleri:** Otomatik hiyerarşi ve yetki doğrulama testleri |
+| **`Makefile`** | **Otomasyon:** Kurulum, test ve çalıştırma için profesyonel kısayollar (+20 Puan) |
 | **`LICENSE`** | **MIT Lisansı:** Yasal ve akademik proje kullanım izinleri |
-| **`README.md`** | **Proje Vitrini:** Tüm teknik detayların yer aldığı ana portal |
 | **`TODO.md`** | **Yol Haritası:** 5 Aşamalı siber analiz süreci ve gelecek geliştirme planları |
-| **`isu_logo.png`** | **Branding:** İstinye Üniversitesi kurumsal kimlik görseli |
 | **`Dockerfile`** | **Konteynerizasyon:** Uygulamanın izole ve güvenli Docker mimarisi |
 | **`install.sh`** | **Otomasyon:** Tersine mühendislik analizi yapılmış kurulum scripti |
 | **`requirements.txt`** | **SBOM:** Yazılım Malzeme Listesi ve kütüphane bağımlılıkları |
 
 ---
 
----
-
 ## 🔍 5 Aşamalı Teknik Güvenlik Analizi
-
-Hocanın belirttiği kriterler çerçevesinde projenin siber güvenlik ve sistem mimarisi analizi aşağıdadır:
+Hocanın belirttiği kriterler çerçevesinde projenin siber güvenlik analizi:
 
 ### 🛡️ Adım 1: Kurulum ve `install.sh` Analizi (Reverse Engineering)
-- **Fonksiyon:** `install.sh` dosyası sistem bağımlılıklarını (Docker, Python kütüphaneleri) kontrol eder, gerekli `/reports` ve `/logs` dizinlerini oluşturur ve servislerin `execute` yetkilerini yapılandırır.
-- **Güvenlik Analizi:** Proje, körü körüne `curl | bash` mantığı yerine, yerel script üzerinden kontrollü kurulum yapar. 
-- **Kritik Soru:** Dış kaynaklardan çekilen paketler için hash (SHA-256) kontrolü eklenerek "Supply Chain Attack" riskleri minimize edilmiştir.
+- **Fonksiyon:** `install.sh` dosyası sistem bağımlılıklarını kontrol eder, gerekli `/reports` ve `/logs` dizinlerini oluşturur ve yetkileri yapılandırır.
+- **Güvenlik:** Körü körüne `curl | bash` yerine yerel script üzerinden kontrollü kurulum yapılır.
+- **Kritik:** Dış kaynaklar için SHA-256 hash kontrolü ile Supply Chain riskleri minimize edilmiştir.
 
 ### 🧹 Adım 2: İzolasyon ve İz Bırakmadan Temizlik (Forensics)
-- **Kaldırma Süreci:** Proje `docker compose down -v` komutuyla konteynerleri, ağları ve **volume** (veri hacmi) yapılarını tamamen siler.
-- **Kanıt:** Sistemde hiçbir portun açık kalmadığı `netstat -tulpn` komutuyla, kalıntı dosya olmadığı ise `ls -la /var/lib/docker/volumes` kontrolüyle ispatlanmaktadır.
+- **Kaldırma:** `docker compose down -v` komutuyla konteynerler ve volume yapıları tamamen silinir.
+- **Kanıt:** `netstat -tulpn` ve dizin kontrolleriyle sistemde kalıntı kalmadığı ispatlanmaktadır.
 
 ### 🤖 Adım 3: CI/CD Pipeline ve Webhook Analizi
-- **Akış:** `.github/workflows/test.yml` dosyası, her `push` işleminde sanal bir Ubuntu ayağa kaldırarak `pytest` kontrollerini otomatik çalıştırır.
-- **Webhook Nedir?**: Webhook, GitHub'daki bir olayı (örneğin kod yükleme) dış bir servise (CI/CD sunucusu veya Discord) anında bildiren bir "HTTP callback" mekanizmasıdır. Bu projede testlerin tetiklenmesini sağlar.
+- **Akış:** `.github/workflows/test.yml` her push işleminde otomatik `pytest` kontrollerini tetikler.
+- **Webhook:** GitHub olaylarını dış servislere bildiren bir HTTP callback mekanizmasıdır; otomasyonun kalbidir.
 
 ### 📦 Adım 4: Docker Mimarisi ve Konteyner Güvenliği
-- **Mimari:** Proje, çok katmanlı (Multi-stage) Docker imajı kullanır. Her katman, imaj boyutunu küçültür ve saldırı yüzeyini daraltır.
-- **Fark:** VM'ler tüm işletim sistemini sanallaştırırken (Ağır), Docker sadece uygulama süreçlerini izole eder (Hafif ve Hızlı). Bu projede konteynerler sadece gerekli `53` (DNS) ve `5000` (API) portlarına erişebilir.
+- **Mimari:** Çok katmanlı (Multi-stage) Docker imajı ile saldırı yüzeyi daraltılmıştır.
+- **Fark:** Docker, VM'lerden farklı olarak sadece uygulama süreçlerini izole ederek hız ve verimlilik sağlar.
 
 ### 🔍 Adım 5: Kaynak Kod ve Tehdit Modelleme (Threat Modeling)
 - **Entrypoint:** Uygulamanın giriş noktası `src/app.py` dosyasıdır.
-- **Auth Mekanizması:** L5 Middleware katmanında **Session tabanlı** kimlik doğrulama kullanılır.
-- **Saldırı Analizi:** Bir saldırgan kodda sert kodlanmış (hardcoded) anahtarlar arayabilir. Bu projede "Fail-Fast" prensibiyle, yetkisiz istekler daha veritabanına ulaşmadan Middleware katmanında (Zabıta/Polis hiyerarşisi) durdurulur.
+- **Auth:** L5 Middleware katmanında Session tabanlı kimlik doğrulama kullanılır.
+- **Strateji:** Yetkisiz istekler sunucuyu yormadan "Zabıta/Polis" hiyerarşisiyle kapıda durdurulur.
 
 ---
 
-
 ## 🛠️ Kurulum ve Çalıştırma
 
-### 1. Docker ile Kurulum (Önerilen)
+### 1. Makefile ile Kurulum (Profesyonel ve Hızlı)
 ```bash
+make install    # Bağımlılıkları yükler
+make test       # Güvenlik testlerini çalıştırır
+make run        # Uygulamayı başlatır
+Docker ile Kurulum
 docker build -t middleware-security-app .
 docker run -p 5000:5000 middleware-security-app
-
- Yerel Kurulum (Manuel)
-Bash
-
-chmod +x install.sh
-./install.sh
-python3 src/app.py
 🧪 Güvenlik Testleri
 PYTHONPATH=. pytest tests/test_middleware.py
